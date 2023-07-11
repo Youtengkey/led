@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build STM32 Firmware",
+            "command": "make",
+            "args": [],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+        },
+        {
+            "type": "shell",
+            "label": "Build and Download",
+            "command":"openocd",
+            "args": [
+                "-f",
+                "/usr/local/share/openocd/scripts/interface/stlink-v2.cfg",
+                "-f",
+                "/usr/local/share/openocd/scripts/target/stm32f1x.cfg",
+                "-c",
+                "program build/LED.elf verify reset exit"
+ 
+             ],
+             "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "dependsOn":"Build STM32 Firmware",
+
+
+        }
+
+    ]
+}
